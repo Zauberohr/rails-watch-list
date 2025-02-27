@@ -1,4 +1,7 @@
 class Bookmark < ApplicationRecord
-  belongs_to :Movie
-  belongs_to :List
+  belongs_to :movie
+  belongs_to :list
+
+  validates :comment, presence: true, length: { minimum: 6 }
+  validates :movie_id, uniqueness: { scope: :list_id, message: "should only be added once per list" }
 end
